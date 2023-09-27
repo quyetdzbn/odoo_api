@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="model_inherit_crm_sale_form_view" model="ir.ui.view">
+        <field name="name">crmsale.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position='after'>
+                <field name="Doanh_thu_toi_thieu" attrs="{'readonly': [('quotation_count', '>', 0)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='user_id']" position='after'>
+                <field name="team_member_ids" string ="Assign" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='user_id']" position='attributes'>
+                <attribute name="domain">[('id', 'in' , team_member_ids)] </attribute>
+            </xpath>
+
+             <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d']"  position='attributes'>
+                <attribute name="attrs">{'invisible': [('priority', '!=', '3')]} </attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d']"  position='attributes'>
+                <attribute name="groups">crm-sales.group_manager_sales</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

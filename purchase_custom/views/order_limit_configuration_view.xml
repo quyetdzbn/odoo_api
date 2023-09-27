@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="order_limit_configuration_view_form" model="ir.ui.view">
+        <field name="name">order.limit.configuration</field>
+        <field name="model">order.limit.configuration</field>
+        <field name="arch" type="xml">
+            <form string="order limit configuration">
+                <sheet>
+                    <field name="link_to_b"  widget="section_and_note_one2many">
+                        <tree editable="bottom" create="1" edit="1">
+                            <field name="staff" string="Nhân viên"/>
+                            <field name="limit_order" string="Hạn mức/đơn"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="order_limit_configuration_act_server" model="ir.actions.server">
+            <field name="name">Order limit configuration</field>
+            <field name="model_id" ref="purchase_custom.model_order_limit_configuration"/>
+            <field name="binding_model_id" ref="purchase_custom.model_order_limit_configuration"/>
+            <field name="state">code</field>
+            <field name="code">action = model.action_open_config()</field>
+        </record>
+
+        <menuitem name="Order limit configuration"
+                  id="order_limit_configuration"
+                  parent="purchase.menu_purchase_root"
+                  action="order_limit_configuration_act_server"/>
+</odoo>

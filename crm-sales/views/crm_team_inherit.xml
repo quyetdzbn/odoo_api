@@ -1,0 +1,32 @@
+<odoo>
+    <record id="model_inherit_crm_team_form_view" model="ir.ui.view">
+        <field name="name">salesteam.inherit.form</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='members_users']" position='before'>
+                <page string="chỉ tiêu doanh số theo tháng(trước VAT)" name="test">
+                    <group>
+                        <field name="thang1" string="Tháng 1"/>
+                        <field name="thang2" string="Tháng 2"/>
+                        <field name="thang3" string="Tháng 3"/>
+                        <field name="thang4" string="Tháng 4"/>
+                        <field name="thang5" string="Tháng 5"/>
+                        <field name="thang6" string="Tháng 6"/>
+                        <field name="thang7" string="Tháng 7"/>
+                        <field name="thang8" string="Tháng 8"/>
+                        <field name="thang9" string="Tháng 9"/>
+                        <field name="thang10" string="Tháng 10"/>
+                        <field name="thang11" string="Tháng 11"/>
+                        <field name="thang12" string="Tháng 12"/>
+                    </group>
+                </page>
+            </xpath>
+
+             <xpath expr="//page[@name='test']" position='attributes'>
+                <attribute name="groups">crm-sales.group_manager_sales</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

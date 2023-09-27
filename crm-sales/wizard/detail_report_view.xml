@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="bao_cao_tree_wizard" model="ir.ui.view">
+        <field name="name">bao.cao.tree</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <tree string="bao cao">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="team_id"/>
+                <field name="Doanh_thu_toi_thieu" string="doanh thu tối thiểu"/>
+                 <field name="Doanh_thu_thuc_te" string="doanh thu thực tế" />
+                 <field name="revenue_difference" string="Chênh lệch doanh thu thực tế" />
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="bao_cao_tree_action" model="ir.actions.act_window">
+        <field name="name">báo cáo chi tiết</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">tree</field>
+<!--        <field name="target">new</field>-->
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                   (0, 0, {'view_mode': 'tree', 'view_id': ref('bao_cao_tree_wizard')})]"/>
+    </record>
+
+<!--    <menuitem id="customer_menu_1" name="bao_cao_tree_1" parent="crm.crm_menu_root"-->
+<!--              action="bao_cao_tree_action" groups="base.group_user"/>-->
+
+</odoo>

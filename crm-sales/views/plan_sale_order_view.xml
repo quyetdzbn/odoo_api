@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="phuong_an_kinh_doanh_form" model="ir.ui.view">
+        <field name="name">phuong.an.form</field>
+        <field name="model">plan.sale.order</field>
+        <field name="priority">32</field>
+        <field name="arch" type="xml">
+            <form string="phuong an">
+                <header>
+                    <field name="check_status" widget="statusbar"
+                           statusbar_visible="new,send_approve,approve,refuse_approve"/>
+                </header>
+                <sheet>
+                    <button string="Send approve" name="send_approved" class="btn-primary" type="object"
+                            attrs="{'invisible': ['|','|','|',('check_status', '=', 'send_approve'),('check_status', '=', 'approve'),('check_status', '=', 'refuse_approve'),
+                            ('check_button', '=', False)]}"/>
+                    <button string="Reset" class="btn-primary" name="reset_approved" type="object"
+                            attrs="{'invisible': ['|','|','|',('check_status', '=', 'approve'),
+                                                ('check_status', '=', 'send_approve'),('check_status', '=', 'new'),('check_button', '=', False)]}"/>
+                    <group>
+                        <group>
+                            <field name="check_button" invisible="1"/>
+                            <field name="name_quote" string="Name"
+                                   attrs="{'readonly': ['|',('check_status', '=', 'send_approve'),('check_status', '=', 'approve')]}"/>
+                            <field name="quote" string="Quote" readonly="1"/>
+                            <field name="information_business" string="Information"
+                                   attrs="{'readonly': ['|',('check_status', '=', 'send_approve'),('check_status', '=', 'approve')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="List of approvers">
+                            <field name="list_check_names" widget="section_and_note_one2many"
+                                   attrs="{'readonly': ['|',('check_status', '=', 'send_approve'),('check_status', '=', 'approve')]}">
+                                <tree editable="bottom">
+                                    <field name="name" required="1"/>
+
+                                    <field name="check_refuse_status" invisible="1"/>
+                                    <field name="check_current_user" invisible="1"/>
+                                    <field name="status" readonly="1"/>
+                                    <button string="Approve" name="approve_status" type="object" class="btn-primary"
+                                            attrs="{'invisible': ['|','|',('status', '=', 'approve'),('check_current_user', '=', False),('check_refuse_status', '!=', False)]}"/>
+                                    <button string="Refuse" name="refuse_status" type="object"
+                                            class="btn-primary"
+                                            attrs="{'invisible': ['|','|',('status', '=', 'approve'),('check_current_user', '=', False),('check_refuse_status', '!=', False)]}"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="manage_business_plan" model="ir.ui.view">
+        <field name="name">manage_business_plan.tree</field>
+        <field name="model">plan.sale.order</field>
+        <field name="arch" type="xml">
+            <tree string="manage">
+                <field name="quote" string="Quote"/>
+                <field name="name_quote" string="Name"/>
+                <field name="information_business" string="Information business"/>
+                <field name="check_status" string="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="manage_business_plan_action" model="ir.actions.act_window">
+        <field name="name">Phương án kinh doanh</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">plan.sale.order</field>
+        <field name="view_mode">tree</field>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                           (0, 0, {'view_mode': 'tree', 'view_id': ref('manage_business_plan')})]"/>
+    </record>
+
+    <record id="phuong_an_kinh_doanh_action" model="ir.actions.act_window">
+        <field name="name">Phương án kinh doanh</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">plan.sale.order</field>
+        <field name="view_mode">form</field>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                           (0, 0, {'view_mode': 'form', 'view_id': ref('phuong_an_kinh_doanh_form')})]"/>
+    </record>
+
+    <menuitem id="manager" name="Manage Business" parent="sale.sale_menu_root"
+              action="manage_business_plan_action" groups="crm-sales.group_phuong_an_kinh_doanh"/>
+</odoo>
+

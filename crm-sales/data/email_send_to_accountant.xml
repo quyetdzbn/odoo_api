@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mail_template_mobile_merge_request" model="mail.template">
+            <field name="name">báo cáo kinh doanh và mua hàng</field>
+            <field name="model_id" ref="crm-sales.model_cronjob_data_report"/>
+            <field name="subject">BÁO CÁO KINH DOANH VÀ MUA HÀNG</field>
+
+            <field name="body_html" type="html">
+                <table border="1">
+                    <tr>
+                        <th colspan="3">Báo cáo kinh doanh tháng <t t-out="object.create_date.month or ''">' '</t> </th>
+                    </tr>
+                    <tr>
+                        <th>Tên nhóm bán hàng</th>
+                        <th>Doanh thu thực tế</th>
+                        <th>Chênh lệch doanh thu thực tế so với chỉ tiêu</th>
+                    </tr>
+
+                    <t t-foreach="object.crm_report" t-as="rec">
+                         <tr>
+                         <td><t t-out="rec.team_sale.name or ''">' '</t></td>
+                         <td><t t-out="rec.revenue or ''">'  '</t></td>
+                         <td><t t-out="rec.diff_revenue_and_month_target or ''">'  '</t></td>
+                        </tr>
+                     </t>
+
+                </table>
+
+                <table border="1">
+                     <tr>
+                        <th colspan="3">Báo cáo mua hàng tháng <t t-out="object.create_date.month or ''">' '</t> </th>
+                    </tr>
+                    <tr>
+                        <th>Tên phòng ban</th>
+                        <th>chi tiêu thực tế</th>
+                        <th>Chênh lệch chi tiêu thực tế so với hạn mức</th>
+                    </tr>
+                    <t t-foreach="object.purchase_report" t-as="seller">
+                         <tr>
+                         <td><t t-out="seller.department.name or ''">'  '</t></td>
+                         <td><t t-out="seller.actual_spending or ''">'  '</t></td>
+                         <td><t t-out="seller.revenue_difference or ''">'  '</t></td>
+                        </tr>
+                     </t>
+                </table>
+            </field>
+
+            <field name="lang" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

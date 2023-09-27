@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="bao_cao_chi_tieu_tree_wizard_new" model="ir.ui.view">
+        <field name="name">bao.cao.tree</field>
+        <field name="model">target.report</field>
+        <field name="arch" type="xml">
+            <tree string="bao cao">
+                <field name="team_sale" />
+                 <field name="revenue" string="doanh thu thực tế" />
+                 <field name="revenue_target" string="chỉ tiêu doanh thu" />
+                <field name="diff_revenue_and_month_target" string="chênh lệch" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="bao_cao_chi_tieu_tree_action" model="ir.actions.act_window">
+        <field name="name">Báo cáo đánh giá chỉ tiêu</field>
+        <field name="res_model">target.report</field>
+        <field name="view_mode">tree</field>
+<!--        <field name="target">new</field>-->
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                   (0, 0, {'view_mode': 'tree', 'view_id': ref('bao_cao_chi_tieu_tree_wizard_new')})]"/>
+    </record>
+
+<!--    <menuitem id="bao_cao_menu_3" name="Targert reportt Test" parent="crm.crm_menu_root"-->
+<!--              action="bao_cao_chi_tieu_tree_action" groups="base.group_user"/>-->
+
+</odoo>

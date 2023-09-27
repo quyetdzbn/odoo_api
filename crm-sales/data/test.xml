@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mail_template_mobile_merge_request" model="mail.template">
+            <field name="name">Yêu cầu cập nhật thông tin và duyệt gắn khách hàng trên mobile và khách hàng trên hệ
+                thống CRM
+            </field>
+            <field name="model_id" ref="advanced_customer_data.model_mobile_merge_request"/>
+            <field name="subject">Yêu cầu cập nhật thông tin từ Mobile App</field>
+<!--            <field name="email_from">${object.email_from | safe}</field>-->
+<!--            <field name="email_to">${object.dealer_email_list | safe}</field>-->
+            <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0"
+                       style="background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    <tr>
+                        <td align="center">
+                            <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                   style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                                <tbody>
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                <td style="text-align : left">
+                                                    <span style="font-size: 15px;font-weight: bold;">
+                                                        Đại lý đã nhận được yêu cầu cập nhật thông tin từ Mobile App
+                                                    </span>
+                                                    <br/>
+                                                    <br/>
+                                                </td>
+                                                <tr>
+                                                    <td valign="top" style="font-size: 13px;">
+                                                        <div>
+                                                            Tên: ${object.customer_name or ''}
+                                                            <br></br>
+                                                            Loại khách hàng: ${object.customer_type or ''}
+                                                            <br></br>
+                                                            Số điện thoại: ${object.phone or ''}
+                                                            <br></br>
+                                                            Mã số thuế: ${object.vat or ''}
+                                                            <br></br>
+                                                            Số CMND/CCCD: ${object.cmt or ''}
+                                                            <br></br>
+                                                            Biển số xe: ${object.license_plates or ''}
+                                                            <br></br>
+                                                            Ảnh chụp giấy phép kinh doanh:
+                                                            <br></br>
+                                                            % if object.customer_type == 'company':
+                                                                % for img in object.business_license_img:
+                                                                    <img  src="${img.url}"/>
+                                                                    <br></br>
+                                                                % endfor
+                                                            % endif
+                                                            % if object.customer_type == 'person':
+                                                                % for img in object.id_card_img:
+                                                                    <img src="${img.url}"/>
+                                                                    <br></br>
+                                                                % endfor
+                                                            % endif
+                                                            <br></br>
+                                                            Ảnh chụp biển số xe:
+                                                            <br></br>
+                                                            % for img in object.car_img:
+                                                                <img  src="${img.url}"/>
+                                                                <br></br>
+                                                            % endfor
+
+
+
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <hr width="100%"
+                                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </field>
+            <field name="lang" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="report_to_accountant_tree_wizard" model="ir.ui.view">
+        <field name="name">report.to.account</field>
+        <field name="model">report.accountant</field>
+        <field name="arch" type="xml">
+            <tree string="report">
+                <field name="department" string="phòng ban"/>
+                <field name="spending_limit_month" string="Hạn mức chi tiêu/tháng"/>
+                <field name="actual_spending" string="Chi tiêu thực tế"/>
+                <field name="revenue_difference" string="chênh lệch chi tiêu thực tế với hạn mức"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="report_to_accountant_action_wizard" model="ir.actions.act_window">
+        <field name="name">Báo cáo cho kế toán</field>
+        <field name="res_model">report.accountant</field>
+        <field name="view_mode">tree</field>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                   (0, 0, {'view_mode': 'tree', 'view_id': ref('report_to_accountant_tree_wizard')})]"/>
+    </record>
+
+<!--    <menuitem id="report1" name="Report to accountant" parent="purchase.menu_purchase_root"-->
+<!--              action="report_to_accountant_action_wizard" groups="base.group_user"/>-->
+
+</odoo>

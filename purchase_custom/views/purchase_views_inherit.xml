@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="purchase_order_inherit_form_view" model="ir.ui.view">
+        <field name="name">InheritPurchaseOrder</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_ref']" position='after'>
+                <field name="department" string ="Phòng ban"/>
+            </xpath>
+
+             <xpath expr="//field[@name='product_id']" position='after'>
+                <field string="Nhà cung cấp đề xuất" name="recommended_supplier"/>
+             </xpath>
+        </field>
+    </record>
+</odoo>

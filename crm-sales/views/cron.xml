@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="managex" model="ir.ui.view">
+        <field name="name">manage</field>
+        <field name="model">cronjob.data.report</field>
+        <field name="arch" type="xml">
+            <form string="manage">
+                <sheet>
+                    <field name="purchase_report" />
+                 <field name="crm_report" />
+                    <field name="create_date"/>
+                 </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="report_view_tree" model="ir.ui.view">
+        <field name="name">_view_tree</field>
+        <field name="model">cronjob.data.report</field>
+        <field name="arch" type="xml">
+            <tree string="_tree">
+              <field name="purchase_report" />
+                 <field name="crm_report" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_menu" model="ir.actions.act_window">
+        <field name="name">Phương án </field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cronjob.data.report</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="test_menu" name="Manage Test" parent="sale.sale_menu_root"
+              action="action_menu" groups="base.group_user"/>
+</odoo>
+

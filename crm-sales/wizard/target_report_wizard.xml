@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="bao_cao_chi_tieu_wizard" model="ir.ui.view">
+        <field name="name">bao.cao.chi.tieu.form</field>
+        <field name="model">baocao.wizard</field>
+        <field name="arch" type="xml">
+            <form string="bao cao">
+                 <head>
+                            Báo cáo đánh giá chỉ tiêu
+                        </head>
+                <sheet>
+                    <group>
+
+                        <field name="team_ids" string="team" widget="many2many_tags"/>
+                        <field name="select_month" string="Tháng"/>
+
+                    </group>
+                    <footer>
+                        <button string="xuất dữ liệu" name="get_target_report" class="btn-primary" type="object"/>
+                        <button string="hủy" class="btn-default" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="bao_cao_chi_tieu_action" model="ir.actions.act_window">
+        <field name="name">Báo cáo đánh giá chỉ tiêu</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">baocao.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+         <field name="view_id" ref="bao_cao_chi_tieu_wizard"/>
+    </record>
+
+    <menuitem id="bao_cao_menu_2" name="Target report" parent="crm.crm_menu_root"
+              action="bao_cao_chi_tieu_action" groups="base.group_user"/>
+
+</odoo>

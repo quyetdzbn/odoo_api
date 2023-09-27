@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="popup_wizard" model="ir.ui.view">
+        <field name="name">popup.form</field>
+        <field name="model">report.to.accountant</field>
+        <field name="arch" type="xml">
+            <form string="popup wizard">
+                <sheet>
+                    <p>
+                        Giá tiền đơn hàng bị quá hạn mức, người dùng hiện tại chưa có quyền xác nhận, đợi kế toán vào xác nhận
+                    </p>
+                    <footer>
+                        <button special="cancel" data-hotkey="z" string="Ok" default_focus="1" class="oe_highlight"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

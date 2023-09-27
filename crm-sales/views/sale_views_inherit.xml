@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="model_inherit_sale_form_view" model="ir.ui.view">
+        <field name="name">saleoder.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_cancel']" position='before'>
+                <button string="Create business plan" name="create_plan_business" type="object"
+                        attrs="{'invisible': [('check', '!=', False)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='validity_date']" position="before">
+                <field name="link" />
+            </xpath>
+            <xpath expr="//field[@name='validity_date']" position="before">
+                <field name="check" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
